@@ -1,14 +1,11 @@
 import json
 import io
 from typing import List
-from PIL import Image
-import base64
 from langchain_chroma import Chroma
-from langchain_experimental.open_clip import OpenCLIPEmbeddings
-from langchain.embeddings.openai import OpenAIEmbeddings
+from langchain_openai import OpenAIEmbeddings
 from langchain_openai import ChatOpenAI
 from langchain_core.messages import HumanMessage, SystemMessage
-from langchain_core.pydantic_v1 import BaseModel, Field
+from pydantic import BaseModel, Field
 from langchain_core.output_parsers import JsonOutputParser
 
 llm = ChatOpenAI(
@@ -16,6 +13,12 @@ llm = ChatOpenAI(
     temperature=0.2,
     model_kwargs={"response_format": {"type": "json_object"}}
 )
+
+
+class AnimationIdentifier(BaseModel):
+    """Motion which suits according to query"""
+    motion: str = Field(description="Motion required for the scene in detail")
+
 
 class ImageIdentifier(BaseModel):
     """Images which suits according to query"""
@@ -58,6 +61,32 @@ def fetch_chain(inputs, type, context):
     )
     return msg.content
 
+
+def fetch_animation_chain(inputs):
+    prompt = f'''
+    Your task is to analyze the human query and give the most suitable motion required.
+    '''
+    parser = JsonOutputParser(pydantic_object=AnimationIdentifier)
+
+    prompt = [
+        SystemMessage(
+            content=[
+                {"type": "text", "text": prompt},
+                {"type": "text", "text": parser.get_format_instructions()},
+            ]
+        ),
+        HumanMessage(
+            content=[
+                {"type": "text", "text": inputs['query']}
+            ]
+        )
+    ]
+    msg = llm.invoke(
+        prompt
+    )
+    return msg.content
+
+
 def scene_search(query):
     scene_vectorstore = Chroma(
         collection_name="whiteboard_scenes_v1",
@@ -76,6 +105,9 @@ def scene_search(query):
     )
 
     scene_docs = scene_vectorstore.similarity_search_with_relevance_scores(query, k=1)
+    msg = fetch_animation_chain(inputs={"query": query})
+    animation_payload = json.loads(msg)
+    print(f"Expected Motion: {animation_payload['motion']}")
     for ind, scene_doc in enumerate(scene_docs):
         print(f"Scene Image: {scene_doc[0].metadata['uri']}")
         print(f"Animated motions in the scene: {scene_doc[0].metadata['motions']}")
@@ -107,6 +139,6 @@ def scene_search(query):
                     print(f"        - {prop_doc[0].metadata['uri']} {prop_doc[0].metadata['visual_description']} {prop_doc[1]}")
 
 query = '''
-A close-up of a hospice worker thoroughly washing hands with soap and water.
+A caregiver assisting an elderly patient in bed, followed by a recent hospital discharge scenario.
 '''
 scene_search(query=query)

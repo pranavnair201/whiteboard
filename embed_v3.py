@@ -3,11 +3,10 @@ import json
 import base64
 from typing import List
 
+from pydantic import BaseModel, Field
 from langchain_chroma import Chroma
-from langchain.embeddings.openai import OpenAIEmbeddings
-from langchain_openai import ChatOpenAI
+from langchain_openai import OpenAIEmbeddings, ChatOpenAI
 from langchain_core.messages import HumanMessage, SystemMessage
-from langchain_core.pydantic_v1 import BaseModel, Field
 from langchain_core.output_parsers import JsonOutputParser
 
 llm = ChatOpenAI(
