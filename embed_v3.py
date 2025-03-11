@@ -20,8 +20,8 @@ llm = ChatOpenAI(
 class SceneImageInformation(BaseModel):
     """Scene information"""
     visual_description: str = Field(description="visual description of the image")
-    characters: List[str] = Field(description="detailed keyword of characters inside the image")
-    props: List[str] = Field(description="detailed keyword of props inside the image")
+    characters: List[str] = Field(description="Precisely described keywords of characters inside the image")
+    props: List[str] = Field(description="Precisely described keywords of props inside the image")
     motions: List[str] = Field(description="detailed keyword of animated motion inside the image")
 
 
@@ -51,7 +51,7 @@ def embed_scenes():
 
     def fetch_chain(inputs):
         prompt = '''
-        Provide the full detailed description of the image. Also provide list of characters, props and animation motion visible in the image. 
+        Provide the full detailed description of the image in hospital scenario. Also provide list of characters, props and animation motion visible in the image. 
         '''
         prompt = [
                 SystemMessage(
@@ -117,12 +117,12 @@ def embed_props_and_characters():
         if type == "character":
             parser = JsonOutputParser(pydantic_object=CharacterInformation)
             prompt = '''
-            Provide the precise description of the character. 
+            Provide the precise description of the character in hospital scenario. 
             '''
         else:
             parser = JsonOutputParser(pydantic_object=PropInformation)
             prompt = '''
-            Provide the precise description of the prop. 
+            Provide the precise description of the prop in hospital scenario. 
             '''
         prompt = [
                 SystemMessage(

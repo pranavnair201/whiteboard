@@ -1,10 +1,62 @@
+import json
 import io
+from typing import List
 from PIL import Image
 import base64
 from langchain_chroma import Chroma
 from langchain_experimental.open_clip import OpenCLIPEmbeddings
 from langchain.embeddings.openai import OpenAIEmbeddings
+from langchain_openai import ChatOpenAI
+from langchain_core.messages import HumanMessage, SystemMessage
+from langchain_core.pydantic_v1 import BaseModel, Field
+from langchain_core.output_parsers import JsonOutputParser
 
+llm = ChatOpenAI(
+    model='gpt-4o',
+    temperature=0.2,
+    model_kwargs={"response_format": {"type": "json_object"}}
+)
+
+class ImageIdentifier(BaseModel):
+    """Images which suits according to query"""
+    images: List[int] = Field(description="IDs of the images")
+
+def fetch_chain(inputs, type, context):
+    if type == "character":
+        prompt = f'''
+        Your task is to analyze the human query and give the most suitable and similar characters from the below CONTEXT characters.
+        
+        CONTEXT:
+        {context}
+        
+        '''
+    else:
+        prompt = f'''
+        Your task is to analyze the human query and give the most suitable and similar props from the below CONTEXT props.
+
+        CONTEXT:
+        {context}
+
+        '''
+    parser = JsonOutputParser(pydantic_object=ImageIdentifier)
+
+    prompt = [
+        SystemMessage(
+            content=[
+                {"type": "text", "text": prompt},
+                {"type": "text", "text": parser.get_format_instructions()},
+            ]
+        ),
+        HumanMessage(
+            content=[
+                {"type": "text", "text": inputs['query']}
+            ]
+        )
+    ]
+    msg = llm.invoke(
+        prompt
+    )
+    return msg.content
 
 def scene_search(query):
     scene_vectorstore = Chroma(
@@ -27,20 +79,34 @@ def scene_search(query):
     for ind, scene_doc in enumerate(scene_docs):
         print(f"Scene Image: {scene_doc[0].metadata['uri']}")
         print(f"Animated motions in the scene: {scene_doc[0].metadata['motions']}")
+
         print("Similar Characters:")
         for ind, character in enumerate(scene_doc[0].metadata['characters'].split(",")):
             print(f"    Character {ind+1}: ", character)
             character_docs = character_vectorstore.similarity_search_with_relevance_scores(character, k=5)
+            character_cxt = "\n".join([str({"id": doc[0].metadata['id'] ,"description": doc[0].metadata['visual_description']}) for doc in character_docs])
+            response = fetch_chain(inputs={"query": character}, type="character", context=character_cxt)
+            ans_payload = json.loads(response)
+            img_ids = ans_payload['images']
             for ind, character_doc in enumerate(character_docs):
-                print(f"        - {character_doc[0].metadata['uri']} {character_doc[0].metadata['visual_description']} {character_doc[1]}")
+                if character_doc[0].metadata['id'] in img_ids:
+                    print(f"        - {character_doc[0].metadata['uri']} {character_doc[0].metadata['visual_description']} {character_doc[1]}")
+
         print("Similar Props:")
         for ind, prop in enumerate(scene_doc[0].metadata['props'].split(",")):
             print(f"    Prop {ind+1}: ", prop)
             prop_docs = prop_vectorstore.similarity_search_with_relevance_scores(prop, k=5)
+            prop_cxt = "\n".join(
+                [str({"id": doc[0].metadata['id'], "description": doc[0].metadata['visual_description']}) for doc in
+                 prop_docs])
+            response = fetch_chain(inputs={"query": prop}, type="prop", context=prop_cxt)
+            ans_payload = json.loads(response)
+            img_ids = ans_payload['images']
             for ind, prop_doc in enumerate(prop_docs):
-                print(f"        - {prop_doc[0].metadata['uri']} {prop_doc[0].metadata['visual_description']} {prop_doc[1]}")
+                if prop_doc[0].metadata['id'] in img_ids:
+                    print(f"        - {prop_doc[0].metadata['uri']} {prop_doc[0].metadata['visual_description']} {prop_doc[1]}")
 
 query = '''
-A calm hospice setting. A hospice care worker is gently washing their hands.
+A close-up of a hospice worker thoroughly washing hands with soap and water.
 '''
 scene_search(query=query)
