@@ -35,7 +35,7 @@ class PropInformation(BaseModel):
 
 
 def embed_scenes():
-    path = '/home/le-106/project/whiteboard/images_v2/scenes/'
+    path = './images_v2/scenes/'
 
     image_uris = sorted(
         [
@@ -93,8 +93,8 @@ def embed_scenes():
     print("Scene embeddings saved successfully")
 
 def embed_props_and_characters():
-    character_path = '/home/le-106/project/whiteboard/images_v2/characters/'
-    props_path = '/home/le-106/project/whiteboard/images_v2/props/'
+    character_path = './images_v2/characters/'
+    props_path = './images_v2/props/'
 
     character_image_uris = sorted(
         [
