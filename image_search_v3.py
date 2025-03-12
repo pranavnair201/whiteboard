@@ -6,7 +6,7 @@ from langchain_openai import OpenAIEmbeddings
 from langchain_openai import ChatOpenAI
 from langchain_core.messages import HumanMessage, SystemMessage
 from pydantic import BaseModel, Field
-from langchain_core.output_parsers import JsonOutputParser
+from json_parser import CustomJsonOutputParser
 
 llm = ChatOpenAI(
     model='gpt-4o',
@@ -18,6 +18,7 @@ llm = ChatOpenAI(
 class AnimationIdentifier(BaseModel):
     """Motion which suits according to query"""
     motion: str = Field(description="Motion required for the scene in detail")
+    characters: List[str] = Field(description="Characters required for the scene in detail")
 
 
 class ImageIdentifier(BaseModel):
@@ -41,7 +42,7 @@ def fetch_chain(inputs, type, context):
         {context}
 
         '''
-    parser = JsonOutputParser(pydantic_object=ImageIdentifier)
+    parser = CustomJsonOutputParser(pydantic_object=ImageIdentifier)
 
     prompt = [
         SystemMessage(
@@ -64,9 +65,9 @@ def fetch_chain(inputs, type, context):
 
 def fetch_animation_chain(inputs):
     prompt = f'''
-    Your task is to analyze the human query and give the most suitable motion required.
+    Your task is to analyze the visual provided by human and give the most suitable motions and characters required for that visual.
     '''
-    parser = JsonOutputParser(pydantic_object=AnimationIdentifier)
+    parser = CustomJsonOutputParser(pydantic_object=AnimationIdentifier)
 
     prompt = [
         SystemMessage(
@@ -108,6 +109,7 @@ def scene_search(query):
     msg = fetch_animation_chain(inputs={"query": query})
     animation_payload = json.loads(msg)
     print(f"Expected Motion: {animation_payload['motion']}")
+    print(f"Expected Characters: {animation_payload['characters']}")
     for ind, scene_doc in enumerate(scene_docs):
         print(f"Scene Image: {scene_doc[0].metadata['uri']}")
         print(f"Animated motions in the scene: {scene_doc[0].metadata['motions']}")
