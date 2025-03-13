@@ -1,6 +1,5 @@
 import json
-import io
-from typing import List
+from typing import List, Optional
 from langchain_chroma import Chroma
 from langchain_openai import OpenAIEmbeddings
 from langchain_openai import ChatOpenAI
@@ -16,9 +15,8 @@ llm = ChatOpenAI(
 
 
 class AnimationIdentifier(BaseModel):
-    """Motion which suits according to query"""
-    motion: str = Field(description="Motion required for the scene in detail")
-    characters: List[str] = Field(description="Characters required for the scene in detail")
+    """Scene which suits according to the visual"""
+    scene_id: Optional[int] = Field(description="ID of the scene")
 
 
 class ImageIdentifier(BaseModel):
@@ -63,9 +61,13 @@ def fetch_chain(inputs, type, context):
     return msg.content
 
 
-def fetch_animation_chain(inputs):
+def fetch_animation_chain(inputs, context):
     prompt = f'''
-    Your task is to analyze the visual provided by human and give the most suitable motions and characters required for that visual.
+    Your task is to analyze the visual provided by human and give the most suitable scene required for that visual.
+    
+    CONTEXT:
+    {context}
+    
     '''
     parser = CustomJsonOutputParser(pydantic_object=AnimationIdentifier)
 
@@ -105,12 +107,21 @@ def scene_search(query):
         embedding_function=OpenAIEmbeddings()
     )
 
-    scene_docs = scene_vectorstore.similarity_search_with_relevance_scores(query, k=1)
-    msg = fetch_animation_chain(inputs={"query": query})
+    scene_docs = scene_vectorstore.similarity_search_with_relevance_scores(query, k=5)
+    scene_cxt = "\n".join(
+        [str({"id": doc[0].metadata['id'], "description": doc[0].metadata['visual_description']}) for doc in
+         scene_docs])
+
+    msg = fetch_animation_chain(inputs={"query": query}, context=scene_cxt)
     animation_payload = json.loads(msg)
-    print(f"Expected Motion: {animation_payload['motion']}")
-    print(f"Expected Characters: {animation_payload['characters']}")
+    if (scene_id := animation_payload.get("scene_id",None)) is None:
+        print("No scene found")
+        return
+    print(scene_id)
+
     for ind, scene_doc in enumerate(scene_docs):
+        if scene_id != scene_doc[0].metadata['id']:
+            continue
         print(f"Scene Image: {scene_doc[0].metadata['uri']}")
         print(f"Animated motions in the scene: {scene_doc[0].metadata['motions']}")
 
@@ -143,4 +154,8 @@ def scene_search(query):
 query = '''
 A caregiver assisting an elderly patient in bed, followed by a recent hospital discharge scenario.
 '''
+
+# query = '''
+# A boy is dancing
+# '''
 scene_search(query=query)
