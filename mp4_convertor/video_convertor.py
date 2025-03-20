@@ -33,7 +33,7 @@ PAYLOAD = {
     "audio": [{"audio_path": "bg.mp3"}],
     "scenes": [
         {
-            "lottie": "./scene_1.json",
+            "lottie": "./demo_6.json",
             "text": [
                 {
                     "src": "",
@@ -155,7 +155,7 @@ PAYLOAD = {
 
 scenes = PAYLOAD.get("scenes")
 scene_clips = []
-for ind, scene in enumerate(scenes):
+for ind, scene in enumerate(scenes[:1]):
     os.makedirs(f"frames/{ind}", exist_ok=True)
 
     anim = LottieAnimation.from_file(scene['lottie'])
@@ -169,9 +169,9 @@ for ind, scene in enumerate(scenes):
     print("Frame Duration:", anim.lottie_animation_get_duration())
     lottie_duration = anim.lottie_animation_get_duration()
     frames = [f"./frames/{ind}/frame_{i:03d}.png" for i in range(anim.lottie_animation_get_totalframe())]
-    clip = ImageSequenceClip(frames, fps=30)
+    clip = ImageSequenceClip(frames, fps=anim.lottie_animation_get_framerate())
     # clip = concatenate_videoclips([clip] * int(np.ceil(15//lottie_duration)))
-    clip = Loop(duration=10).apply(clip)
+    clip = Loop(duration=20).apply(clip)
     texts = scene.get('text', [])
     text_clips = []
     for text in texts:
@@ -195,4 +195,4 @@ output_audio = concatenate_audioclips(audio_clips).subclipped(0, output_video.du
 
 
 final_video = output_video.with_audio(output_audio)
-# final_video.write_videofile("output.mp4", codec="libx264", audio_codec="aac")
+final_video.write_videofile("output.mp4", codec="libx264", audio_codec="aac")
