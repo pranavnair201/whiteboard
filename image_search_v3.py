@@ -97,7 +97,7 @@ def scene_search(query):
         embedding_function=OpenAIEmbeddings()
     )
     character_vectorstore = Chroma(
-        collection_name="whiteboard_characters_v2",
+        collection_name="whiteboard_characters_v1",
         persist_directory='./chroma',
         embedding_function=OpenAIEmbeddings()
     )
