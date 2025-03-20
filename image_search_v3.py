@@ -97,7 +97,7 @@ def scene_search(query):
         embedding_function=OpenAIEmbeddings()
     )
     character_vectorstore = Chroma(
-        collection_name="whiteboard_characters_v1",
+        collection_name="whiteboard_characters_v2",
         persist_directory='./chroma',
         embedding_function=OpenAIEmbeddings()
     )
@@ -152,7 +152,7 @@ def scene_search(query):
                     print(f"        - {prop_doc[0].metadata['uri']} {prop_doc[0].metadata['visual_description']} {prop_doc[1]}")
 
 query = '''
-A caregiver assisting an elderly patient in bed, followed by a recent hospital discharge scenario.
+A character is sitting.
 '''
 
 # query = '''

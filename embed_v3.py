@@ -92,7 +92,9 @@ def embed_scenes():
     print("Scene embeddings saved successfully")
 
 def embed_props_and_characters():
-    character_path = './images_v2/characters/'
+    # character_path = './images_v3/characters/'
+    character_path = './images_v3/'
+
     props_path = './images_v2/props/'
 
     character_image_uris = sorted(
@@ -151,32 +153,32 @@ def embed_props_and_characters():
         IMG_DESC.append(ans_payload)
 
     character_vectorstore = Chroma(
-        collection_name="whiteboard_characters_v1",
+        collection_name="whiteboard_characters_v2",
         persist_directory='./chroma',
         embedding_function=OpenAIEmbeddings()
     )
 
     character_vectorstore.add_texts(texts=[obj['visual_description'] for obj in IMG_DESC], metadatas=IMG_DESC)
     print("Character embeddings saved successfully")
+    #
+    # IMG_DESC = []
+    # for ind, img_uri in enumerate(props_image_uris):
+    #     with open(img_uri, "rb") as image_file:
+    #         base64_string = base64.b64encode(image_file.read()).decode("utf-8")
+    #     msg = fetch_chain(inputs={"image": f"data:image/png;base64,{base64_string}"}, type='props')
+    #     ans_payload = json.loads(msg)
+    #     ans_payload.update({"id": ind, "uri": img_uri})
+    #     print("Props->", ans_payload)
+    #     IMG_DESC.append(ans_payload)
+    #
+    # prop_vectorstore = Chroma(
+    #     collection_name="whiteboard_props_v1",
+    #     persist_directory='./chroma',
+    #     embedding_function=OpenAIEmbeddings()
+    # )
+    #
+    # prop_vectorstore.add_texts(texts=[obj['visual_description'] for obj in IMG_DESC], metadatas=IMG_DESC)
+    # print("Props embeddings saved successfully")
 
-    IMG_DESC = []
-    for ind, img_uri in enumerate(props_image_uris):
-        with open(img_uri, "rb") as image_file:
-            base64_string = base64.b64encode(image_file.read()).decode("utf-8")
-        msg = fetch_chain(inputs={"image": f"data:image/png;base64,{base64_string}"}, type='props')
-        ans_payload = json.loads(msg)
-        ans_payload.update({"id": ind, "uri": img_uri})
-        print("Props->", ans_payload)
-        IMG_DESC.append(ans_payload)
-
-    prop_vectorstore = Chroma(
-        collection_name="whiteboard_props_v1",
-        persist_directory='./chroma',
-        embedding_function=OpenAIEmbeddings()
-    )
-
-    prop_vectorstore.add_texts(texts=[obj['visual_description'] for obj in IMG_DESC], metadatas=IMG_DESC)
-    print("Props embeddings saved successfully")
-
-embed_scenes()
+# embed_scenes()
 embed_props_and_characters()
