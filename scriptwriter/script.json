@@ -1,0 +1,193 @@
+{
+    "characters": [
+        {
+            "name": "Dr. Wisecrack",
+            "gender": "male",
+            "age": 40,
+            "voice_description": "Playful yet authoritative; a tone that makes you giggle but also listen.",
+            "visual_description": "A 2D cartoon man with a stethoscope on his neck, a quirky moustache, and round glasses. He wears a white lab coat with colorful doodles like viruses and shields."
+        },
+        {
+            "name": "Skeptical Sally",
+            "gender": "female",
+            "age": 35,
+            "voice_description": "Sassy and skeptical, full of comedic timing with a sarcastic edge.",
+            "visual_description": "A 2D cartoon woman wearing a business suit, holding a giant coffee mug and rolling her eyes. She has a messy desk behind her, symbolic of a work-from-home vibe."
+        }
+    ],
+    "scenes": [
+        {
+            "title": "Introduction to the Importance of Preventing Coronavirus",
+            "visible_characters": [
+                {
+                    "name": "Dr. Wisecrack"
+                },
+                {
+                    "name": "Skeptical Sally"
+                }
+            ],
+            "background": "A clean, cartoonish hospital room with big posters saying 'Wash Your Hands, You Filthy Animal.' A goofy animated virus with sunglasses dances on one of the posters.",
+            "dialogues": [
+                {
+                    "speaker_type": "narrator",
+                    "name": null,
+                    "dialogue": "The world was turned upside down by a tiny, invisible force: the coronavirus.",
+                    "sec_pause_before": 1000,
+                    "audio": "./dialogues/dialogue_0_0.mp3"
+                },
+                {
+                    "speaker_type": "character",
+                    "name": "Dr. Wisecrack",
+                    "dialogue": "You heard it, folks. A microscopic villain ruined vacations, made sweatpants trendy, and turned toilet paper into a rare commodity.",
+                    "sec_pause_before": 500,
+                    "audio": "./dialogues/dialogue_0_1.mp3"
+                },
+                {
+                    "speaker_type": "character",
+                    "name": "Skeptical Sally",
+                    "dialogue": "Oh please, Doc. Let's not pretend people washed their hands BEFORE the pandemic.",
+                    "sec_pause_before": 500,
+                    "audio": "./dialogues/dialogue_0_2.mp3"
+                },
+                {
+                    "speaker_type": "character",
+                    "name": "Dr. Wisecrack",
+                    "dialogue": "Touch\u00e9, Sally. But now, we have no choice. Let me enlighten you with some tips to avoid a handshake with disaster.",
+                    "sec_pause_before": 500,
+                    "audio": "./dialogues/dialogue_0_3.mp3"
+                }
+            ],
+            "display_text": "How to Prevent the Coronavirus: A Sarcastic Guide",
+            "audio": "./dialogues/scene_0.mp3"
+        },
+        {
+            "title": "Tip 1: Wash Your Hands",
+            "visible_characters": [
+                {
+                    "name": "Dr. Wisecrack"
+                }
+            ],
+            "background": "A cartoon bathroom sink with soap bars, rubber duckies, and bubbles coming alive to applaud when hands are scrubbed.",
+            "dialogues": [
+                {
+                    "speaker_type": "character",
+                    "name": "Dr. Wisecrack",
+                    "dialogue": "Step one, wash those hands like you're auditioning for a surgeon role in a soap opera.",
+                    "sec_pause_before": 0,
+                    "audio": "./dialogues/dialogue_1_0.mp3"
+                },
+                {
+                    "speaker_type": "character",
+                    "name": "Dr. Wisecrack",
+                    "dialogue": "And no, Sally. Splashing some water and calling it a day does NOT count. Use soap\u2014yes, the scented, bubbly wonder.",
+                    "sec_pause_before": 500,
+                    "audio": "./dialogues/dialogue_1_1.mp3"
+                },
+                {
+                    "speaker_type": "character",
+                    "name": "Skeptical Sally",
+                    "dialogue": "Soap? Revolutionary. What's next? Breathing air?",
+                    "sec_pause_before": 500,
+                    "audio": "./dialogues/dialogue_1_2.mp3"
+                },
+                {
+                    "speaker_type": "character",
+                    "name": "Dr. Wisecrack",
+                    "dialogue": "Exactly! Now scrub those hands for 20 whole seconds. Hum 'Happy Birthday' twice... or question your life choices. Either works.",
+                    "sec_pause_before": 0,
+                    "audio": "./dialogues/dialogue_1_3.mp3"
+                }
+            ],
+            "display_text": "Tip #1: Wash your hands properly for 20 seconds!",
+            "audio": "./dialogues/scene_1.mp3"
+        },
+        {
+            "title": "Tip 2: Wear a Mask",
+            "visible_characters": [
+                {
+                    "name": "Dr. Wisecrack"
+                },
+                {
+                    "name": "Skeptical Sally"
+                }
+            ],
+            "background": "A supermarket aisle with a cartoonishly large mask on every item: bananas, bottles, even the shopping carts.",
+            "dialogues": [
+                {
+                    "speaker_type": "character",
+                    "name": "Dr. Wisecrack",
+                    "dialogue": "Masks! Not for Halloween, but for those heroic nostrils! Believe it or not, they block viruses too, not just bad breath.",
+                    "sec_pause_before": 0,
+                    "audio": "./dialogues/dialogue_2_0.mp3"
+                },
+                {
+                    "speaker_type": "character",
+                    "name": "Skeptical Sally",
+                    "dialogue": "What if I wear it as a chin guard? Trendy, right?",
+                    "sec_pause_before": 500,
+                    "audio": "./dialogues/dialogue_2_1.mp3"
+                },
+                {
+                    "speaker_type": "character",
+                    "name": "Dr. Wisecrack",
+                    "dialogue": "Sure, if your chin is the one doing all the breathing. Cover your nose AND mouth. It's not rocket science, Sally.",
+                    "sec_pause_before": 500,
+                    "audio": "./dialogues/dialogue_2_2.mp3"
+                },
+                {
+                    "speaker_type": "character",
+                    "name": "Dr. Wisecrack",
+                    "dialogue": "Also, don\u2019t forget! Wash or replace your mask. Nobody wants to breathe through something that smells like last week's sandwich.",
+                    "sec_pause_before": 500,
+                    "audio": "./dialogues/dialogue_2_3.mp3"
+                }
+            ],
+            "display_text": "Tip #2: Wear a proper mask like you mean it!",
+            "audio": "./dialogues/scene_2.mp3"
+        },
+        {
+            "title": "Final Thoughts: Stay Safe, Stay Sarcastic",
+            "visible_characters": [
+                {
+                    "name": "Dr. Wisecrack"
+                },
+                {
+                    "name": "Skeptical Sally"
+                }
+            ],
+            "background": "A sunny park setting with cartoon people wearing masks, jogging, and maintaining a comical 6-feet distance with exaggerated measuring tapes.",
+            "dialogues": [
+                {
+                    "speaker_type": "character",
+                    "name": "Skeptical Sally",
+                    "dialogue": "So, Doc, to sum it all up: wash hands, wear masks, and avoid crowds... basically, don\u2019t be gross?",
+                    "sec_pause_before": 0,
+                    "audio": "./dialogues/dialogue_3_0.mp3"
+                },
+                {
+                    "speaker_type": "character",
+                    "name": "Dr. Wisecrack",
+                    "dialogue": "Couldn't have said it better myself, Sally. And don't forget\u2014maintain physical distance. These six feet could save your life!",
+                    "sec_pause_before": 500,
+                    "audio": "./dialogues/dialogue_3_1.mp3"
+                },
+                {
+                    "speaker_type": "character",
+                    "name": "Skeptical Sally",
+                    "dialogue": "Six feet? If only my annoying neighbor followed that rule BEFORE the pandemic.",
+                    "sec_pause_before": 500,
+                    "audio": "./dialogues/dialogue_3_2.mp3"
+                },
+                {
+                    "speaker_type": "character",
+                    "name": "Dr. Wisecrack",
+                    "dialogue": "And with that, stay safe, stay sarcastic, and remember: COVID prevention is no joke... but it doesn\u2019t hurt to laugh a little.",
+                    "sec_pause_before": 500,
+                    "audio": "./dialogues/dialogue_3_3.mp3"
+                }
+            ],
+            "display_text": "Final Thoughts: Be Safe & Smile Under Your Mask!",
+            "audio": "./dialogues/scene_3.mp3"
+        }
+    ]
+}

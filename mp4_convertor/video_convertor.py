@@ -1,157 +1,13 @@
-# ---------------------------------------------Approach 1 --------------------------------------------
-# from rlottie_python import LottieAnimation
-# from moviepy import VideoFileClip
-#
-# anim = LottieAnimation.from_file("./scene_1.json")
-# anim.save_animation("./scene_1.webp")
-# clip = VideoFileClip("./scene_1.webp")
-#
-# # Write it as MP4
-# clip.write_videofile("./output.mp4", codec="libx264")
-
-
-
-# ---------------------------------------------- Approach 2 ------------------------------------------
-# from lottie.exporters import exporters
-# from lottie.importers import importers
-#
-# importer = importers.get_from_filename("scene_1.json")
-# an = importer.process("scene_1.json")
-#
-# exporter = exporters.get_from_filename("scene_1.mp4")
-# exporter.process(an, "scene_1.mp4", **{'format': None})
-
-# ---------------------------------------------- Approach 3 ------------------------------------------
 import os
 import numpy as np
 from rlottie_python import LottieAnimation
 from moviepy import ImageSequenceClip, TextClip, CompositeVideoClip, AudioFileClip, concatenate_videoclips, \
-    concatenate_audioclips
+    concatenate_audioclips, ImageClip, vfx
 from moviepy.video.fx import Loop
+import json
 
-PAYLOAD = {
-    "audio": [{"audio_path": "bg.mp3"}],
-    "scenes": [
-        {
-            "lottie": "./demo_6.json",
-            "text": [
-                {
-                    "src": "",
-                    "thumb": "text1.png",
-                    "enterStart": 0,
-                    "exitEnd": 10,
-                    "exitEffectName": "no_Effect",
-                    "index": 1,
-                    "enterEffectName": "handWriteAsian",
-                    "enterEnd": 0.5,
-                    "exitStart": 0,
-                    "flipPosition": 0,
-                    "height": 50,
-                    "isMultimove": False,
-                    "opacity": 1,
-                    "subType": "DTXT",
-                    "type": "TEXT",
-                    "width": 150,
-                    "x": 316,
-                    "y": 186,
-                    "angle": 0,
-                    "assetId": "",
-                    "textData": {
-                        "splittedText": "Hello there",
-                        "isDefault": True,
-                        "formats": {
-                            "containerStyle": {
-                                "margin": "0px",
-                                "fontFamily": "Sniglet-Regular",
-                                "color": "rgb(0, 0, 0)",
-                                "textAlign": "left",
-                                "fontSize": "20px",
-                                "lineHeight": 24.8,
-                                "fontStyle": "normal",
-                                "fontWeight": "400"
-                            },
-                            "bullet": {
-                                "type": "none",
-                                "bulletSpace": 10
-                            },
-                            "others": {
-                                "isItalic": False,
-                                "isAutoFontSize": False,
-                                "sizeFixed": True,
-                                "isUserFont": False,
-                                "family": "Sniglet",
-                                "isRTL": False,
-                                "isFixedWidth": True,
-                                "isBold": False
-                            }
-                        },
-                        "langId": "fo.he.tx",
-                        "htmlText": "Hello there"
-                    }
-                }
-            ]
-        },
-        {
-            "lottie": "./merged_lottie.json",
-            "text": [
-                {
-                    "src": "",
-                    "thumb": "text1.png",
-                    "enterStart": 0,
-                    "exitEnd": 10,
-                    "exitEffectName": "no_Effect",
-                    "index": 1,
-                    "enterEffectName": "handWriteAsian",
-                    "enterEnd": 0.5,
-                    "exitStart": 0,
-                    "flipPosition": 0,
-                    "height": 50,
-                    "isMultimove": False,
-                    "opacity": 1,
-                    "subType": "DTXT",
-                    "type": "TEXT",
-                    "width": 150,
-                    "x": 22,
-                    "y": 28,
-                    "angle": 0,
-                    "assetId": "",
-                    "textData": {
-                        "splittedText": "How are you?",
-                        "isDefault": True,
-                        "formats": {
-                            "containerStyle": {
-                                "margin": "0px",
-                                "fontFamily": "Sniglet-Regular",
-                                "color": "rgb(0, 0, 0)",
-                                "textAlign": "left",
-                                "fontSize": "20px",
-                                "lineHeight": 24.8,
-                                "fontStyle": "normal",
-                                "fontWeight": "400"
-                            },
-                            "bullet": {
-                                "type": "none",
-                                "bulletSpace": 10
-                            },
-                            "others": {
-                                "isItalic": False,
-                                "isAutoFontSize": False,
-                                "sizeFixed": True,
-                                "isUserFont": False,
-                                "family": "Sniglet",
-                                "isRTL": False,
-                                "isFixedWidth": True,
-                                "isBold": False
-                            }
-                        },
-                        "langId": "fo.he.tx",
-                        "htmlText": "How are you?"
-                    }
-                }
-            ]
-        },
-    ]
-}
+with open("./animation_assets/project.json") as f:
+    PAYLOAD = json.load(f)
 
 scenes = PAYLOAD.get("scenes")
 scene_clips = []
@@ -171,22 +27,37 @@ for ind, scene in enumerate(scenes[:1]):
     frames = [f"./frames/{ind}/frame_{i:03d}.png" for i in range(anim.lottie_animation_get_totalframe())]
     clip = ImageSequenceClip(frames, fps=anim.lottie_animation_get_framerate())
     # clip = concatenate_videoclips([clip] * int(np.ceil(15//lottie_duration)))
-    clip = Loop(duration=20).apply(clip)
+    clip = Loop(duration=scene.get('duration', 10)).apply(clip)
     texts = scene.get('text', [])
     text_clips = []
     for text in texts:
-        text_clip = TextClip(text=text['textData']['htmlText'],
-                    font_size=int(text['textData']['formats']['containerStyle']['fontSize'].replace("px", "")), color='black', font= "./demo.ttf")
+        text_data = text['textData']
+        text_color = tuple(int(value.strip()) for value in text_data['formats']['containerStyle']['color'].strip("rgb()").split(","))
+        text_clip = TextClip(
+            text=text_data['htmlText'],
+            font_size=int(text_data['formats']['containerStyle']['fontSize'].replace("px", "")),
+            color=text_color,
+            # stroke_width=10 if text_data['formats']['containerStyle']['fontWeight']=='bold' else 1,
+            font= f"./{text_data['formats']['containerStyle']['fontFamily']}.woff2")
+
         text_clip = text_clip.with_position((text['x'], text['y'])).with_duration(clip.duration)
+        text_clip =  vfx.Scroll(w=100, h=100, x_speed=0, y_speed=4).apply(text_clip)
         text_clips.append(text_clip)
 
-    final_clip = CompositeVideoClip([clip]+text_clips)
+    background_clip = ImageClip(scene['background_image']).with_duration(clip.duration)
+    background_clip = background_clip.resized((800, 450))
+
+    branding_clip = ImageClip("./company_logo.webp").with_duration(clip.duration).with_position(("right", "bottom")).resized((100, 25)).with_opacity(0.5)
+
+    final_clip = CompositeVideoClip([background_clip, clip] + text_clips + [branding_clip])
+
     scene_clips.append(final_clip)
 
 output_video = concatenate_videoclips(scene_clips, method='compose')
 
 
 audios = PAYLOAD.get("audio")
+print("audios -=> ", audios)
 audio_clips = []
 for audio in audios:
     audio_clip = AudioFileClip(audio['audio_path']) # .subclipped(0, clip.duration)
@@ -195,4 +66,4 @@ output_audio = concatenate_audioclips(audio_clips).subclipped(0, output_video.du
 
 
 final_video = output_video.with_audio(output_audio)
-final_video.write_videofile("output.mp4", codec="libx264", audio_codec="aac")
+final_video.write_videofile("output-4.mp4", codec="libx264", audio_codec="aac")

@@ -34,7 +34,7 @@ class PropInformation(BaseModel):
 
 
 def embed_scenes():
-    path = './images_v3/scenes/'
+    path = './images_v2/scenes/'
 
     image_uris = sorted(
         [
@@ -93,9 +93,9 @@ def embed_scenes():
 
 def embed_props_and_characters():
     # character_path = './images_v3/characters/'
-    character_path = './images_v3/characters/'
+    character_path = './images_v2/characters/'
 
-    props_path = './images_v3/props/'
+    props_path = './images_v2/props/'
 
     character_image_uris = sorted(
         [

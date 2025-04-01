@@ -1,0 +1,62 @@
+{
+  "audio": [
+    {
+      "audio_path": "./animation_assets/bg.mp3"
+    }
+  ],
+  "scenes": [
+    {
+      "lottie": "./animation_assets/lottie_scene_1_original.json",
+      "duration": 10,
+      "background_image": "./animation_assets/sunrise.jpg",
+      "text": [
+        {
+          "src": "",
+          "thumb": "text1.png",
+          "enterStart": 0,
+          "exitEnd": 10,
+          "exitEffectName": "no_Effect",
+          "index": 1,
+          "enterEffectName": "handWriteAsian",
+          "enterEnd": 0.5,
+          "exitStart": 0,
+          "flipPosition": false,
+          "height": 50,
+          "isMultimove": false,
+          "opacity": 1,
+          "subType": "DTXT",
+          "type": "TEXT",
+          "width": 150,
+          "x": 169,
+          "y": 348,
+          "angle": 0,
+          "assetId": "",
+          "textData": {
+            "splittedText": "Scene 2",
+            "isDefault": true,
+            "formats": {
+              "containerStyle": {
+                "fontFamily": "BLACKcurveRegular",
+                "color": "rgb(255, 0, 0)",
+                "textAlign": "left",
+                "fontSize": "28px",
+                "lineHeight": 34.72,
+                "fontStyle": "italic",
+                "fontWeight": "700"
+              }
+            },
+            "langId": "fo.he.tx",
+            "htmlText": "Scene 2",
+            "lineHeight": 34.72
+          }
+        }
+      ]
+    },
+    {
+      "lottie": "./animation_assets/lottie_scene_2.json",
+      "duration": 10,
+      "background_image": "./animation_assets/home_yoga_area.webp",
+      "text": []
+    }
+  ]
+}
