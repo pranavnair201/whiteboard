@@ -6,57 +6,133 @@
   ],
   "scenes": [
     {
-      "lottie": "./animation_assets/lottie_scene_1_original.json",
+      "lottie": "./animation_assets/lottie_scene_0.json",
       "duration": 10,
+      "type": "lottie",
+      "background_image": "./animation_assets/home_yoga_area.webp",
+      "text": []
+    },
+    {
+      "lottie": "./animation_assets/lottie_scene_1.json",
+      "duration": 10,
+      "type": "lottie",
       "background_image": "./animation_assets/sunrise.jpg",
+      "text": []
+    },
+    {
+      "lottie": "./animation_assets/lottie_scene_3.json",
+      "duration": 10,
+      "type": "text",
+      "background_image": "",
       "text": [
         {
-          "src": "",
-          "thumb": "text1.png",
-          "enterStart": 0,
-          "exitEnd": 10,
-          "exitEffectName": "no_Effect",
-          "index": 1,
-          "enterEffectName": "handWriteAsian",
-          "enterEnd": 0.5,
-          "exitStart": 0,
-          "flipPosition": false,
-          "height": 50,
-          "isMultimove": false,
-          "opacity": 1,
-          "subType": "DTXT",
-          "type": "TEXT",
-          "width": 150,
-          "x": 169,
-          "y": 348,
-          "angle": 0,
-          "assetId": "",
-          "textData": {
-            "splittedText": "Scene 2",
-            "isDefault": true,
-            "formats": {
-              "containerStyle": {
-                "fontFamily": "BLACKcurveRegular",
-                "color": "rgb(255, 0, 0)",
-                "textAlign": "left",
-                "fontSize": "28px",
-                "lineHeight": 34.72,
-                "fontStyle": "italic",
-                "fontWeight": "700"
+          "id": "3",
+          "actions": [
+            {
+              "id": "action-4",
+              "parentId": "3",
+              "start": 3,
+              "end": 12,
+              "effectId": "effect2",
+              "data": {
+                "text": "Welcome to the world of animation",
+                "formatting": {
+                  "bold": true,
+                  "italic": false,
+                  "underline": false,
+                  "fontSize": "16px",
+                  "fontFamily": "Arial",
+                  "backgroundColor": "#000000",
+                  "fontColor": "#ffffff",
+                  "transparent": false
+                },
+                "animation": {
+                  "start": 0,
+                  "end": 3,
+                  "duration": 3,
+                  "type": "fadeIn"
+                },
+                "position": {
+                  "translate": [
+                    300,
+                    175
+                  ],
+                  "rotate": 60,
+                  "scale": [
+                    1,
+                    1
+                  ],
+                  "scene-3-text-action-4": {
+                    "translate": [
+                      264,
+                      38,
+                      0,
+                      0
+                    ],
+                    "rotate": 0,
+                    "scale": [
+                      1,
+                      1
+                    ],
+                    "width": 294,
+                    "height": 40
+                  }
+                }
               }
-            },
-            "langId": "fo.he.tx",
-            "htmlText": "Scene 2",
-            "lineHeight": 34.72
-          }
+            }
+          ]
         }
       ]
     },
     {
-      "lottie": "./animation_assets/lottie_scene_2.json",
+      "lottie": "./animation_assets/lottie_scene_4.json",
       "duration": 10,
-      "background_image": "./animation_assets/home_yoga_area.webp",
-      "text": []
+      "type": "text",
+      "background_image": "",
+      "text": [
+        {
+          "id": "4",
+          "actions": [
+            {
+              "id": "action-5",
+              "parentId": "4",
+              "start": 6,
+              "end": 9,
+              "effectId": "effect2",
+              "data": {
+                "text": "Whiteboard Animation is a great way to explain complex ideas",
+                "formatting": {
+                  "bold": false,
+                  "italic": false,
+                  "underline": false,
+                  "fontSize": "16px",
+                  "fontFamily": "Arial",
+                  "backgroundColor": "#000000",
+                  "fontColor": "#ffffff",
+                  "transparent": true
+                },
+                "animation": {
+                  "start": 0,
+                  "end": 3,
+                  "duration": 1,
+                  "type": "fadeIn"
+                },
+                "position": {
+                  "translate": [
+                    300,
+                    175
+                  ],
+                  "rotate": 70,
+                  "scale": [
+                    1,
+                    1
+                  ]
+                }
+              }
+            }
+          ]
+        }
+      ]
     }
   ]
 }

@@ -36,7 +36,7 @@ class Gender(str, Enum):
     MALE = "male"
     FEMALE = "female"
 
-#
+
 # class SceneCharacter(BaseModel):
 #     """Character needed to appear visually on the scene"""
 #     name: str = Field(description="Name of Character")
@@ -135,7 +135,7 @@ def fetch_img_chain(inputs):
 
 
 if __name__ == "__main__":
-    query = "Corona virus. How to prevent it. Make the script more sarcastic and funny"
+    query = "Importance of Yoga. How to take care of health. Make the script more sarcastic and funny"
     thread_id = None #"thread_1"
     # response = fetch_chain(inputs={"query": query})
     response, thread_id = fetch_assistant_response(user_query=query, thread_id=thread_id)
@@ -148,16 +148,23 @@ if __name__ == "__main__":
 
     voice_map = {}
     for ind, character in enumerate(ans_payload['characters']):
+
         # img_url = fetch_img_url(img_desc=character['visual_description'], img_type='character')
         # character["img_url"] = download_img(img_url=img_url, filename=f"./characters/character_{ind}.png", img_type="character")
+
         voice_map[character["name"]] = voice_generation(gender=character['gender'], age=character['age'], voice_description=character["voice_description"])
-    print(voice_map)
+
+    prev_scene_end = 0
     for s_ind, scene in enumerate(ans_payload['scenes']):
+
         # img_url = fetch_img_url(img_desc=scene['background'], img_type='background')
         # scene["bg_url"] = download_img(img_url=img_url, filename=f"./bg/bg_{s_ind}.png")
+        ans_payload['scenes'][s_ind]["start"] = prev_scene_end
         audio_files = []
+        scene_duration = prev_scene_end
         for d_ind, dialogue in enumerate(scene['dialogues']):
-            dialogue["audio"] = text_to_speech_file(
+            scene['dialogues'][d_ind]['start'] = scene_duration
+            scene['dialogues'][d_ind]["audio"], scene['dialogues'][d_ind]["dialogue_duration"] = text_to_speech_file(
                 text=dialogue['dialogue'],
                 file_name=f"dialogue_{s_ind}_{d_ind}",
                 voice_id=voice_map.get(dialogue.get("name", "Narrator"), None)
@@ -165,8 +172,13 @@ if __name__ == "__main__":
             if dialogue['sec_pause_before']>0:
                 pause_audio = generate_silent_mp3(dialogue['sec_pause_before'], f"pause_{s_ind}_{d_ind}")
                 audio_files.append(pause_audio)
-            audio_files.append(dialogue["audio"])
+            scene['dialogues'][d_ind]['end'] = scene['dialogues'][d_ind]['start'] + scene['dialogues'][d_ind]['dialogue_duration'] + scene['dialogues'][d_ind]['sec_pause_before']
+            audio_files.append(scene['dialogues'][d_ind]["audio"])
+            scene_duration = scene['dialogues'][d_ind]['end']
         scene['audio'] = concatenate_mp3(files=audio_files, output_file=f"./dialogues/scene_{s_ind}.mp3")
+        prev_scene_end = scene_duration
+        ans_payload['scenes'][s_ind]["end"] = prev_scene_end
+        ans_payload['scenes'][s_ind]["scene_duration"] = ans_payload['scenes'][s_ind]["end"] - ans_payload['scenes'][s_ind]["start"]
 
     for voice_id in voice_map.values():
         delete_voice(voice_id=voice_id)

@@ -44,7 +44,7 @@ def delete_voice(voice_id):
     return True
 
 
-def text_to_speech_file(text: str, file_name, voice_id) -> str:
+def text_to_speech_file(text: str, file_name, voice_id):
     # VOICE_MAP = {
     #     "narrator": "pNInz6obpgDQGcFmaJgB",
     #     "male": "29vD33N1CtxCmqQRPOHJ",
@@ -81,7 +81,10 @@ def text_to_speech_file(text: str, file_name, voice_id) -> str:
 
     print(f"{save_file_path}: A new audio file was saved successfully!")
 
+    audio = AudioSegment.from_file(save_file_path)
+    duration_ms = len(audio)
+
     # Return the path of the saved audio file
-    return save_file_path
+    return save_file_path, duration_ms
 
 # text_to_speech_file("How can you do this to me?", "demo","male")

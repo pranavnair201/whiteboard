@@ -1,193 +1,227 @@
 {
     "characters": [
         {
-            "name": "Dr. Wisecrack",
+            "name": "Dr. Whizzy",
             "gender": "male",
-            "age": 40,
-            "voice_description": "Playful yet authoritative; a tone that makes you giggle but also listen.",
-            "visual_description": "A 2D cartoon man with a stethoscope on his neck, a quirky moustache, and round glasses. He wears a white lab coat with colorful doodles like viruses and shields."
+            "age": 50,
+            "voice_description": "Deep and authoritative with a subtle playful tone",
+            "visual_description": "A cartoonish doctor with messy hair, glasses slipping down the nose, a white lab coat over a Hawaiian shirt, stethoscope around his neck, and mismatched socks."
         },
         {
-            "name": "Skeptical Sally",
+            "name": "Sassy Sally",
             "gender": "female",
             "age": 35,
-            "voice_description": "Sassy and skeptical, full of comedic timing with a sarcastic edge.",
-            "visual_description": "A 2D cartoon woman wearing a business suit, holding a giant coffee mug and rolling her eyes. She has a messy desk behind her, symbolic of a work-from-home vibe."
+            "voice_description": "High-pitched and bubbly with a touch of sarcasm",
+            "visual_description": "A lively fitness instructor with a ponytail, yoga pants with neon patterns, a tank top that says 'Namastay Cool,' and a yoga mat strapped to her back."
+        },
+        {
+            "name": "Lazy Larry",
+            "gender": "male",
+            "age": 40,
+            "voice_description": "Grumbly and slow, with exaggerated whining tones",
+            "visual_description": "A scruffy guy in pajama pants, a 'Snooze Champion' t-shirt, holding a donut and a half-empty coffee cup, slouching noticeably."
         }
     ],
     "scenes": [
         {
-            "title": "Introduction to the Importance of Preventing Coronavirus",
+            "title": "The Yoga Revelation",
             "visible_characters": [
                 {
-                    "name": "Dr. Wisecrack"
+                    "name": "Dr. Whizzy"
                 },
                 {
-                    "name": "Skeptical Sally"
+                    "name": "Sassy Sally"
+                },
+                {
+                    "name": "Lazy Larry"
                 }
             ],
-            "background": "A clean, cartoonish hospital room with big posters saying 'Wash Your Hands, You Filthy Animal.' A goofy animated virus with sunglasses dances on one of the posters.",
+            "background": "A bright yoga studio with mats rolled out, potted plants in the corners, and a chalkboard with the phrase 'Breathe and Believe.'",
             "dialogues": [
                 {
                     "speaker_type": "narrator",
                     "name": null,
-                    "dialogue": "The world was turned upside down by a tiny, invisible force: the coronavirus.",
+                    "dialogue": "Welcome to the cosmic event of the century: Larry's first-ever yoga class.",
                     "sec_pause_before": 1000,
-                    "audio": "./dialogues/dialogue_0_0.mp3"
+                    "start": 0,
+                    "audio": "./dialogues/dialogue_0_0.mp3",
+                    "dialogue_duration": 4807,
+                    "end": 5807
                 },
                 {
                     "speaker_type": "character",
-                    "name": "Dr. Wisecrack",
-                    "dialogue": "You heard it, folks. A microscopic villain ruined vacations, made sweatpants trendy, and turned toilet paper into a rare commodity.",
+                    "name": "Lazy Larry",
+                    "dialogue": "Why am I here? I thought yoga was just fancy stretching?",
                     "sec_pause_before": 500,
-                    "audio": "./dialogues/dialogue_0_1.mp3"
+                    "start": 5807,
+                    "audio": "./dialogues/dialogue_0_1.mp3",
+                    "dialogue_duration": 3396,
+                    "end": 9703
                 },
                 {
                     "speaker_type": "character",
-                    "name": "Skeptical Sally",
-                    "dialogue": "Oh please, Doc. Let's not pretend people washed their hands BEFORE the pandemic.",
+                    "name": "Sassy Sally",
+                    "dialogue": "Fancy stretching? Oh Larry, bless your sedentary soul! Yoga is the ancient art of NOT becoming a real-life potato.",
                     "sec_pause_before": 500,
-                    "audio": "./dialogues/dialogue_0_2.mp3"
+                    "start": 9703,
+                    "audio": "./dialogues/dialogue_0_2.mp3",
+                    "dialogue_duration": 7393,
+                    "end": 17596
                 },
                 {
                     "speaker_type": "character",
-                    "name": "Dr. Wisecrack",
-                    "dialogue": "Touch\u00e9, Sally. But now, we have no choice. Let me enlighten you with some tips to avoid a handshake with disaster.",
+                    "name": "Dr. Whizzy",
+                    "dialogue": "It balances mind, body, and spirit... and by spirit, I mean canceling out all the calories from donuts.",
                     "sec_pause_before": 500,
-                    "audio": "./dialogues/dialogue_0_3.mp3"
+                    "start": 17596,
+                    "audio": "./dialogues/dialogue_0_3.mp3",
+                    "dialogue_duration": 6139,
+                    "end": 24235
+                },
+                {
+                    "speaker_type": "character",
+                    "name": "Lazy Larry",
+                    "dialogue": "Cancel calories?! Why didn't anyone tell me this before?!",
+                    "sec_pause_before": 400,
+                    "start": 24235,
+                    "audio": "./dialogues/dialogue_0_4.mp3",
+                    "dialogue_duration": 3370,
+                    "end": 28005
                 }
             ],
-            "display_text": "How to Prevent the Coronavirus: A Sarcastic Guide",
-            "audio": "./dialogues/scene_0.mp3"
+            "display_text": "Yoga: The ancient secret to a guilt-free life.",
+            "start": 0,
+            "audio": "./dialogues/scene_0.mp3",
+            "end": 28005,
+            "scene_duration": 28005
         },
         {
-            "title": "Tip 1: Wash Your Hands",
+            "title": "Stretch it or Wreck it",
             "visible_characters": [
                 {
-                    "name": "Dr. Wisecrack"
+                    "name": "Sassy Sally"
+                },
+                {
+                    "name": "Lazy Larry"
                 }
             ],
-            "background": "A cartoon bathroom sink with soap bars, rubber duckies, and bubbles coming alive to applaud when hands are scrubbed.",
+            "background": "A scenic park with a sunrise, a group of people doing yoga outdoors, and birds chirping.",
             "dialogues": [
                 {
                     "speaker_type": "character",
-                    "name": "Dr. Wisecrack",
-                    "dialogue": "Step one, wash those hands like you're auditioning for a surgeon role in a soap opera.",
-                    "sec_pause_before": 0,
-                    "audio": "./dialogues/dialogue_1_0.mp3"
-                },
-                {
-                    "speaker_type": "character",
-                    "name": "Dr. Wisecrack",
-                    "dialogue": "And no, Sally. Splashing some water and calling it a day does NOT count. Use soap\u2014yes, the scented, bubbly wonder.",
+                    "name": "Sassy Sally",
+                    "dialogue": "See Larry, stretching helps your muscles relax and makes you less cranky. It's like therapy but cheaper\u2014and with these cool poses!",
                     "sec_pause_before": 500,
-                    "audio": "./dialogues/dialogue_1_1.mp3"
+                    "start": 28005,
+                    "audio": "./dialogues/dialogue_1_0.mp3",
+                    "dialogue_duration": 7027,
+                    "end": 35532
                 },
                 {
                     "speaker_type": "character",
-                    "name": "Skeptical Sally",
-                    "dialogue": "Soap? Revolutionary. What's next? Breathing air?",
+                    "name": "Lazy Larry",
+                    "dialogue": "Cheaper would've been free. And what's the deal with the Cobra pose? Isn't slithering bad for my back?",
+                    "sec_pause_before": 400,
+                    "start": 35532,
+                    "audio": "./dialogues/dialogue_1_1.mp3",
+                    "dialogue_duration": 5956,
+                    "end": 41888
+                },
+                {
+                    "speaker_type": "character",
+                    "name": "Sassy Sally",
+                    "dialogue": "Oh honey, slithering is the least of your worries. We're trying to save you from becoming fossilized in that couch of yours!",
                     "sec_pause_before": 500,
-                    "audio": "./dialogues/dialogue_1_2.mp3"
+                    "start": 41888,
+                    "audio": "./dialogues/dialogue_1_2.mp3",
+                    "dialogue_duration": 7262,
+                    "end": 49650
                 },
                 {
                     "speaker_type": "character",
-                    "name": "Dr. Wisecrack",
-                    "dialogue": "Exactly! Now scrub those hands for 20 whole seconds. Hum 'Happy Birthday' twice... or question your life choices. Either works.",
-                    "sec_pause_before": 0,
-                    "audio": "./dialogues/dialogue_1_3.mp3"
+                    "name": "Lazy Larry",
+                    "dialogue": "I guess becoming a couch fossil isn't ideal. Can I still have donuts though?",
+                    "sec_pause_before": 400,
+                    "start": 49650,
+                    "audio": "./dialogues/dialogue_1_3.mp3",
+                    "dialogue_duration": 4206,
+                    "end": 54256
                 }
             ],
-            "display_text": "Tip #1: Wash your hands properly for 20 seconds!",
-            "audio": "./dialogues/scene_1.mp3"
+            "display_text": "Stretch now, or face the wrath of the Stiffness Monster.",
+            "start": 28005,
+            "audio": "./dialogues/scene_1.mp3",
+            "end": 54256,
+            "scene_duration": 26251
         },
         {
-            "title": "Tip 2: Wear a Mask",
+            "title": "Doctor's Orders... Kinda",
             "visible_characters": [
                 {
-                    "name": "Dr. Wisecrack"
+                    "name": "Dr. Whizzy"
                 },
                 {
-                    "name": "Skeptical Sally"
+                    "name": "Lazy Larry"
                 }
             ],
-            "background": "A supermarket aisle with a cartoonishly large mask on every item: bananas, bottles, even the shopping carts.",
+            "background": "A cartoonish doctor's office with Dr. Whizzy\u2019s diplomas hanging crookedly on the wall and jars labeled 'Health Stuff'.",
             "dialogues": [
                 {
                     "speaker_type": "character",
-                    "name": "Dr. Wisecrack",
-                    "dialogue": "Masks! Not for Halloween, but for those heroic nostrils! Believe it or not, they block viruses too, not just bad breath.",
-                    "sec_pause_before": 0,
-                    "audio": "./dialogues/dialogue_2_0.mp3"
+                    "name": "Dr. Whizzy",
+                    "dialogue": "Larry, you don\u2019t need to be a celery-munching health nut, but you could at least move your limbs once in a while. Doctors call it 'not letting gravity win.'",
+                    "sec_pause_before": 500,
+                    "start": 54256,
+                    "audio": "./dialogues/dialogue_2_0.mp3",
+                    "dialogue_duration": 8829,
+                    "end": 63585
                 },
                 {
                     "speaker_type": "character",
-                    "name": "Skeptical Sally",
-                    "dialogue": "What if I wear it as a chin guard? Trendy, right?",
-                    "sec_pause_before": 500,
-                    "audio": "./dialogues/dialogue_2_1.mp3"
+                    "name": "Lazy Larry",
+                    "dialogue": "I do move! I walked to the fridge this morning. Twice.",
+                    "sec_pause_before": 400,
+                    "start": 63585,
+                    "audio": "./dialogues/dialogue_2_1.mp3",
+                    "dialogue_duration": 3030,
+                    "end": 67015
                 },
                 {
                     "speaker_type": "character",
-                    "name": "Dr. Wisecrack",
-                    "dialogue": "Sure, if your chin is the one doing all the breathing. Cover your nose AND mouth. It's not rocket science, Sally.",
+                    "name": "Dr. Whizzy",
+                    "dialogue": "Impressive. But let\u2019s aim for big goals\u2014like walking to the yoga studio without a donut in hand.",
                     "sec_pause_before": 500,
-                    "audio": "./dialogues/dialogue_2_2.mp3"
+                    "start": 67015,
+                    "audio": "./dialogues/dialogue_2_2.mp3",
+                    "dialogue_duration": 5224,
+                    "end": 72739
                 },
                 {
                     "speaker_type": "character",
-                    "name": "Dr. Wisecrack",
-                    "dialogue": "Also, don\u2019t forget! Wash or replace your mask. Nobody wants to breathe through something that smells like last week's sandwich.",
-                    "sec_pause_before": 500,
-                    "audio": "./dialogues/dialogue_2_3.mp3"
+                    "name": "Lazy Larry",
+                    "dialogue": "Fine... but only if I can do yoga on a couch.",
+                    "sec_pause_before": 400,
+                    "start": 72739,
+                    "audio": "./dialogues/dialogue_2_3.mp3",
+                    "dialogue_duration": 2769,
+                    "end": 75908
+                },
+                {
+                    "speaker_type": "character",
+                    "name": "Dr. Whizzy",
+                    "dialogue": "Baby steps, Larry. Baby steps.",
+                    "sec_pause_before": 300,
+                    "start": 75908,
+                    "audio": "./dialogues/dialogue_2_4.mp3",
+                    "dialogue_duration": 1881,
+                    "end": 78089
                 }
             ],
-            "display_text": "Tip #2: Wear a proper mask like you mean it!",
-            "audio": "./dialogues/scene_2.mp3"
-        },
-        {
-            "title": "Final Thoughts: Stay Safe, Stay Sarcastic",
-            "visible_characters": [
-                {
-                    "name": "Dr. Wisecrack"
-                },
-                {
-                    "name": "Skeptical Sally"
-                }
-            ],
-            "background": "A sunny park setting with cartoon people wearing masks, jogging, and maintaining a comical 6-feet distance with exaggerated measuring tapes.",
-            "dialogues": [
-                {
-                    "speaker_type": "character",
-                    "name": "Skeptical Sally",
-                    "dialogue": "So, Doc, to sum it all up: wash hands, wear masks, and avoid crowds... basically, don\u2019t be gross?",
-                    "sec_pause_before": 0,
-                    "audio": "./dialogues/dialogue_3_0.mp3"
-                },
-                {
-                    "speaker_type": "character",
-                    "name": "Dr. Wisecrack",
-                    "dialogue": "Couldn't have said it better myself, Sally. And don't forget\u2014maintain physical distance. These six feet could save your life!",
-                    "sec_pause_before": 500,
-                    "audio": "./dialogues/dialogue_3_1.mp3"
-                },
-                {
-                    "speaker_type": "character",
-                    "name": "Skeptical Sally",
-                    "dialogue": "Six feet? If only my annoying neighbor followed that rule BEFORE the pandemic.",
-                    "sec_pause_before": 500,
-                    "audio": "./dialogues/dialogue_3_2.mp3"
-                },
-                {
-                    "speaker_type": "character",
-                    "name": "Dr. Wisecrack",
-                    "dialogue": "And with that, stay safe, stay sarcastic, and remember: COVID prevention is no joke... but it doesn\u2019t hurt to laugh a little.",
-                    "sec_pause_before": 500,
-                    "audio": "./dialogues/dialogue_3_3.mp3"
-                }
-            ],
-            "display_text": "Final Thoughts: Be Safe & Smile Under Your Mask!",
-            "audio": "./dialogues/scene_3.mp3"
+            "display_text": "A little effort goes a long way (even if you start from the couch).",
+            "start": 54256,
+            "audio": "./dialogues/scene_2.mp3",
+            "end": 78089,
+            "scene_duration": 23833
         }
     ]
 }
